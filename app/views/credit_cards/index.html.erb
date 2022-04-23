@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-docs">Cartões de Crédito
+    <div class='col-md-offset-4 ls-float-right'>
+      <%= link_to 'Cadastrar novo cartão', new_credit_card_path, class:"ls-btn-primary ls-btn"%>
+    </div>
+  </h1>
+  <% unless @credit_cards.nil?%>
+    <% if @credit_cards.empty? %>
+      <p class='alert'><strong>Não há cartões de créditos a serem exibidos</strong></p>
+    <% else %>
+      <table class="ls-table ls-txt-center ls-table-striped ls-table-striped ls-bg-header">
+        <thead>
+          <tr>
+            <th>Apelido</th>
+            <th>Situação</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @credit_cards.each do |card| %>
+            <div id="<%= card.nickname %>">
+              <tr>
+                <td><%= card.nickname %></td>
+                <td><%= CreditCard.human_enum_name(:active, card.active) %></td>
+                <td><% if card.up? %>
+                <%= button_to 'Desativar', down_credit_card_path(card.id), class:"ls-btn-primary-danger" %>
+                <% else %>  
+                <%= button_to 'Ativar', up_credit_card_path(card.id), class:"ls-btn-primary" %>
+                <% end %></td>
+              </tr>
+            </div>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+</div>

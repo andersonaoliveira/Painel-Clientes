@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "name": "Hospedagem Básica",
+  "details": "Hospedagem humilde",
+  "status": "available",
+  "product_group": {
+                      "name":"Hospedagem",
+                      "key":"HOSP"
+                    }
+}

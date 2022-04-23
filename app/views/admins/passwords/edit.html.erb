@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <h2 class="ls-title-intro ls-ico-user">ALTERAR SUA SENHA</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "admins/shared/error_messages", resource: resource %>
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="field">
+    <%= f.label :password, "Nova Senha" %><br />
+    <% if @minimum_password_length %>
+      <em> Mínimo (<%= @minimum_password_length %> caracteres)</em><br />
+    <% end %>
+    <%= f.password_field :password, autofocus: true, autocomplete: "Nova Senha" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "Confirme nova senha" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "Nova Senha" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Alterar minha senha" %>
+  </div>
+<% end %>
+
+<%= render "admins/shared/links" %>
+</div>

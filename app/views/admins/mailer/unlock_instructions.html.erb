@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <h2 class="ls-title-intro ls-ico-user">OLÁ <%= @resource.email %>!</h2>
+
+<p>Sua conta foi bloqueada por excesso de tentativas sem sucesso.</p>
+
+<p>Click no link abaixo para desbloquear sua conta:</p>
+
+<p><%= link_to 'Desbloqueie minha conta', unlock_url(@resource, unlock_token: @token) %></p>
+</div>

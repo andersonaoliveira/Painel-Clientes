@@ -1,0 +1,65 @@
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  
+  div{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+.localogo img{
+  height: 4.5rem;
+}
+
+.format-message-send{
+  background-color: #b6fbb6;
+  border-radius: 0.5rem;
+  width: 30rem;
+  padding: 0.3rem;
+  margin: 0.1rem;
+  margin-right: 0.9rem;
+  margin-left: auto;
+}
+
+.format-message-receive{
+  background-color: #d9ebfb;
+  border-radius: 0.5rem;
+  width: 31rem;
+  padding: 0.3rem;
+  margin: 0.1rem;
+  margin-left: 0.9rem;
+}
+
+.wrap{
+  display: flex;
+}
+
+.content{
+  height:100%;
+  display:inline;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.alert, .notice{
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  margin: .5rem;
+}
+
+.required{
+  color: #ff0000;
+}
+
+.list-errors{
+  list-style: none;
+}

@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-edit-admin">Dados do Pedido</h1>
+  <div class="details">
+    <div class="ls-list">
+      <header class="ls-list-header">
+        <div class="ls-list-title col-md-9">
+          <a><h1><%= @product ? @product.name : '----------' %></h1></a>
+        </div>
+      </header>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Código do pedido</span>
+          <strong><%= @order.order_code %></strong>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Status</span>
+          <strong><%= Order.human_enum_name(:status, @order.status) %></strong>
+        </div>
+      </div>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Plano</span>
+          <strong><%= @product ? @product.plan : '----------' %></strong>
+        </div>
+        <div class="col-xs-12 col-md-6 list-content">
+          <div class="col-xs-6 col-md-12">
+            <span class="ls-list-label">Periodicidade</span>
+            <strong><%= @order.frequency %></strong>
+          </div>
+          <div class="col-xs-6 col-md-12">
+            <span class="ls-list-label">Preço</span>
+            <strong><%= number_to_currency(@order.price) %></strong>
+          </div>
+        </div>
+      </div>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-9">
+          <strong class="ls-list-label">Produto</strong>
+          <div class="ls-list">
+            <div class="ls-list-content ">
+              <div class="col-xs-12 col-md-6">
+                <span class="ls-list-label">Status</span>
+                <strong><%= @product ? Product.human_enum_name(:status, @product.status) : '----------' %></strong>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <span class="ls-list-label">Código do produto</span>
+                <strong><%= @product ? (@product.code ? @product.code : '----------') : '----------' %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-9">
+          <strong class="ls-list-label">Cliente</strong>
+          <div class="ls-list">
+            <header class="ls-list-header">
+              <div class="ls-list-title col-md-9">
+                <a><h2><%= @order.client.name %></h2></a>
+              </div>
+              <div class="col-md-3 ls-txt-right">
+                <%= link_to 'Detalhes', admin_client_path(@order.client.id), class: 'ls-btn-primary' %>
+              </div>
+            </header>
+            <div class="ls-list-content ">
+              <div class="col-xs-12 col-md-6">
+                <span class="ls-list-label">Email</span>
+                <strong><%= @order.client.email %></strong>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <span class="ls-list-label">Documento</span>
+                <strong><%= @order.client.eni %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= button_to "Cancelar", cancel_admin_order_path(@order.id), class: 'ls-btn ls-btn-primary-danger',
+            data: { confirm: "Deseja confirmar o cancelamento do pedido?" },
+            method: :post, disabled: !@order.pending? %>
+</div>

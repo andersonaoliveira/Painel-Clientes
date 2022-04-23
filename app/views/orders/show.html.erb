@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-list">Dados do Pedido</h1>
+  <% unless @order.nil?%>
+    <div class='ls-box ls-board-box'>
+      <header class='ls-info-header'>
+        <div class='col-md-6'>
+          <h2 class='ls-title-3 ls-ico-eye'>#<%= @order.order_code %></h2>
+        </div>
+      </header>
+      <table class="ls-table ls-txt-center ls-table-striped ls-bg-header">
+        <thead>
+            <tr>
+              <th><h3>Produto</h3></th>
+              <th><h3>Status do Produto</h3></th>
+              <th><h3>Plano</h3></th>
+              <th><h3>Valor</h3></th>
+              <th><h3>Cliente</h3></th>
+              <th><h3>Status do Pedido</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @order.product.name %></td>
+            <td id=<%= @order.product.id %>><%= Order.human_enum_name(:status, @order.product.status) %></td>
+            <td><%= @order.product.frequency %></td>
+          <td><%= number_to_currency(@order.product.price) %></td>
+          <td><%= current_client.name %></td>
+          <td id=<%= @order.order_code %>><%= Order.human_enum_name(:status, @order.status) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% if @order.pending? %>
+      <div class='ls-box ls-board-box'>
+        <header class='ls-info-header'>
+          <div class='col-md-6'>
+            <h2 class='ls-title-3 ls-ico-cart'>Pagamento de Pedido</h2>
+          </div>
+        </header>
+        <%= form_with(url: pay_order_path, method: :post, html: {class:'ls-form'}) do |f| %>
+          <fieldset>
+            <%= f.hidden_field :order_code, value: @order.order_code %>
+            <%= f.hidden_field :client_eni, value: current_client.eni %>
+            <%= f.hidden_field :product_price, value: @order.product.price %>
+            <%= f.hidden_field :group, value: @order.product.group %>
+            <label class="ls-label col-md-12">
+              <%= f.label :code_token, 'Cartão de Crédito', class:'ls-label' %>
+              <div  class='ls-custom-select'>
+                <%= f.collection_select(:code_token, @credit_cards, :token, :nickname, { include_blank: 'Selecione o Cartão' }, { id: 'card_banner', onchange: 'MaxInstalments()' } ) %>
+              </div>
+            </label>
+            <label class="ls-label col-md-12">
+              <%= f.label :installment, 'Opções de parcelamento', class:'ls-label' %>
+              <div  class='ls-custom-select'>
+                <select id='instalments_select' name='installment'>
+                  <option value>--------</option>
+                </select>
+              </div>
+            </label>
+            <label class="ls-label col-md-12">
+              <%= f.label :cupom, 'Cupom de Desconto', class:'ls-label' %>
+              <%= f.text_field :cupom %>
+            </label>
+            <div class="ls-actions-btn">
+              <%= f.submit 'Efetuar Pagamento', class:'ls-btn-lg ls-btn-primary' %>
+            </div>
+          </fieldset>
+        <% end%>
+      </div>
+    <% end%>
+  <% end %>
+</div>

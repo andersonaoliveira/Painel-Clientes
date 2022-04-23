@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-user">Perfil</h1>
+  <div class="ls-box">
+    <h2 class="ls-title-intro">Cancelamento de Conta</h2>
+    <% cliente = current_client.id %>
+    <% verificador = 0 %>
+    <% products = Product.all %>
+    <% products.each do |chave, valor| %>
+      <% puts chave.client_id, "chave" %>
+      <% puts cliente, "cliente" %>
+      <% puts verificador %>
+      <% if cliente.to_i == chave.client_id.to_i %>
+        <% verificador = 1 %>
+      <% end %>
+    <% end %>
+
+    <% if verificador == 1 %>
+      <p>Você tem produto instalado no seu CPF, não é possível apagar sua conta. </p>
+    <% elsif verificador == 0 %>
+      <p>Você deseja cancelar sua conta? <%= button_to "Cancelar Minha Conta",  client_registration_path(@client), data: { confirm: "Você tem certeza disso?" }, method: :delete, class: 'ls-btn-primary-danger' %></p>
+    <% end %>
+    <%= link_to "Voltar", :back %>
+  </div>
+</div>

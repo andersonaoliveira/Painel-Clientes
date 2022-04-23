@@ -1,0 +1,12 @@
+<li class=<%= current_page?(home_profile_path) ? "ls-active" : "" %>>
+  <%= link_to 'Perfil', home_profile_path, class:"ls-ico-user" %>
+</li>
+<li class=<%= current_page?(products_path) ? "ls-active" : "" %>>
+  <%= link_to 'Produtos', products_path, class: "ls-ico-table-alt" %>
+</li>
+<li class=<%= current_page?(orders_path) ? "ls-active" : "" %>>
+  <%= link_to 'Pedidos', orders_path, class:"ls-ico-edit-admin" %>
+</li>
+<li class=<%= current_page?(credit_cards_path) ? "ls-active" : "" %>>
+  <%= link_to 'Cartões de Crédito', credit_cards_path, class:"ls-ico-docs" %>
+</li>

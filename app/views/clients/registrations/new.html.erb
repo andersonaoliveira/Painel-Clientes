@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="ls-box">
+    <h2 class="ls-title-intro ls-ico-user-add">Registre-se</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'ls-form'}) do |f| %>
+      <%= render "clients/shared/error_messages", resource: resource %>
+      <fieldset>
+        <label class="ls-label col-md-12">
+          <%= f.label :email, class: 'ls-label-text' %>
+          <label class="ls-label-info">Digite seu e-mail</label>
+          <%= f.email_field :email, {autofocus: true, autocomplete: "email", placeholder: 'E-mail'} %>
+        </label>
+      </fieldset>
+      <fieldset class="ls-form-horizontal">
+        <label class="ls-label col-md-6 col-xs-12">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+            <label class="ls-label-info"> mínimo (<%= @minimum_password_length %> caracteres)</label>
+          <% end %>
+          <%= f.password_field :password, {autocomplete: "nova senha", placeholder: 'Senha'} %>
+        </label>
+        <label class="ls-label col-md-6 col-xs-12">
+          <%= f.label :password_confirmation %>
+          <label class="ls-label-info">Digite a senha novamente</label>
+          <%= f.password_field :password_confirmation, {autocomplete: "nova senha", placeholder: 'Confirme sua senha'} %>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="ls-label col-md-12">
+          <%= f.label :name %>
+          <label class="ls-label-info">Digite o seu nome completo</label>
+          <%= f.text_field :name, {placeholder: 'Nome Completo'}%>
+        </label>
+      </fieldset>
+      <fieldset class="ls-form-horizontal">
+        <label class="ls-label col-md-4 col-xs-12">
+          <%= f.label :birth_date %>
+          <label class="ls-label-info">Digite sua data de nascimento</label>
+          <%= f.text_field :birth_date, {placeholder: 'Data de Nascimento'}%>
+        </label>
+        <label class="ls-label col-md-4 col-xs-12">
+          <%= f.label :eni %>
+          <label class="ls-label-info">Digite o número do seu CPF</label>
+          <%= f.text_field :eni, {placeholder: 'CPF'}%>
+        </label>
+        <label class="ls-label col-md-4 col-xs-12">
+          <%= f.label :phone %>
+          <label class="ls-label-info">Digite o seu número de telefone</label>
+          <%= f.text_field :phone, {placeholder: 'Telefone'}%>
+        </label>
+      </fieldset>
+      <fieldset class="ls-form-horizontal">
+        <label class="ls-label col-md-4 col-xs-12">
+          <%= f.label :address %>
+          <label class="ls-label-info">Digite o seu endereço</label>
+          <%= f.text_field :address, {placeholder: 'Endereço'}%>
+        </label>
+        <label class="ls-label col-md-4 col-xs-12">
+          <%= f.label :city %>
+          <label class="ls-label-info">Digite o nome da sua cidade</label>
+          <%= f.text_field :city, {placeholder: 'Cidade'}%>
+        </label>
+        <label class="ls-label col-md-4 col-xs-12">
+          <%= f.label :state %>
+          <label class="ls-label-info">Digite o estado em que você se localiza</label>
+          <%= f.text_field :state, {placeholder: 'Estado'}%>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="ls-label col-md-12">
+          <%= f.label :legal_name %>
+          <label class="ls-label-info">Digite o Nome Fantasia de sua Empresa</label>
+          <%= f.text_field :legal_name, {placeholder: 'Nome Fantasia'}%>
+        </label>
+      </fieldset>
+      <fieldset>
+        <div class="ls-actions-btn">
+          <%= f.submit "Cadastrar", class: 'ls-btn-primary  ' %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <label class="ls-label col-md-4">
+          <%= render "clients/shared/links" %>
+        </label>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

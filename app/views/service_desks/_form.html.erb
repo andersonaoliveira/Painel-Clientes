@@ -1,0 +1,38 @@
+<% if @service_desk.errors.any? %>
+  <span>Verifique os campos abaixo:</span>
+  <ul>
+    <% @service_desk.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with(model: @service_desk, html: {class: 'ls-form'}) do |f| %>
+  <fieldset>
+    <label class="ls-label col-md-4">
+      <h3>Solicitante: <%= current_client.name %></h4><br>
+      <h5>E-mail: <%= current_client.email %></h4><br>
+      <%= f.hidden_field :client_id, value: "#{current_client.id}" %>
+    </label>
+  </fieldset>
+  <fieldset class="ls-form-horizontal">
+    <label class="ls-label col-md-4 col-xs-12">
+      <%= f.label :category_id, 'Categoria', class: 'ls-label-text' %>
+      <div class="ls-custom-select">
+        <%= f.collection_select(:category_id, @categories, :id, :name, {}, class:'ls-custom')%>
+      </div>
+    </label>
+    <label class="ls-label col-md-4 col-xs-12">
+      <%= f.label :order_id, 'Pedido/Produto', class: 'ls-label-text' %>
+      <div class="ls-custom-select">
+        <%= f.select(:order_id, options_for_select(@orders_products, 'selecione'), {}, class:'ls-custom') %>
+      </div>
+    </label>
+    <label class="ls-label col-md-12">
+      <%= f.label :description, 'Descrição', class: 'ls-label-text' %>
+      <%= f.text_area :description, cols: 20, rows: 8 %>
+    </label>
+    <div class="ls-actions-btn">
+      <%= f.submit 'Enviar', class: 'ls-btn-primary' %>
+    </div>
+  </fieldset>
+<% end %>

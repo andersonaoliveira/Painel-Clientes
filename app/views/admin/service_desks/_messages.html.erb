@@ -1,0 +1,43 @@
+<div class="container-fluid" id="messages" style="overflow-y: scroll; height: 200px;">
+  <% unless @messages.empty? %>
+    <% @messages.each do |message| %>
+      <% unless message.admin.nil? %>
+        <div class="row">
+          <div class="format-message-send ls-word-break ls-txt-left">
+            <p><%= message.content %></p>
+            <p><b>Atendente: <%= message.admin.name %></b></p>
+            <p>Enviado em: <%= message.created %></p>
+          </div>
+        </div>
+      <% else %>
+        <div class="row wrap">
+          <div class='format-message-receive ls-display-inline-block ls-word-break ls-txt-right'>          
+            <p><%= message.content %></p>
+            <p><b>Cliente: <%= message.client.name %></b></p>
+            <p>Enviado em: <%= message.created %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+<br>
+<% if @service_desk.in_progress? && @service_desk.admin == current_admin %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= form_with(url: admin_messages_path, method: :post, html: {class: 'ls-form col-md-12 ls-form-inline'}) do |f| %>
+        <%= f.hidden_field :service_desk_id, value: "#{@service_desk.id}" %>
+        <%= f.hidden_field :admin_id, value: "#{current_admin.id}" %>
+        <fieldset>
+          <label class="ls-label col-md-11 col-xs-12">
+            <%= f.label :content, 'Mensagem:', class: 'ls-label-text' %>
+            <%= f.text_field :content %>
+          </label>
+          <div class="col-md-1">
+            <%= f.submit 'Enviar', class: 'ls-btn-primary' %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+<% end %>

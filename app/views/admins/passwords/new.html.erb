@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <h2 class="ls-title-intro ls-ico-user">Esqueceu sua senha?</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "admins/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Envie instruções para criar nova senha." %>
+  </div>
+<% end %>
+
+<%= render "admins/shared/links" %>
+</div>

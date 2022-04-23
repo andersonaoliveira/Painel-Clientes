@@ -1,0 +1,35 @@
+<div class="ls-login-parent">
+  <div class="ls-login-inner">
+    <div class="ls-login-container">
+      <div class="ls-login-box">
+        <h1 class="ls-login-logo">
+          <img title="Logo Login" src="https://opensource.locaweb.com.br/locawebstyle/assets/images/locastyle/logo-locaweb.png">
+        </h1>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "ls-form ls-login-form" }) do |f| %>
+          <fieldset>
+            <label class="ls-label col-md-12">
+              <%= render "clients/shared/error_messages", resource: resource %>
+            </label>
+          </fieldset>
+          <fieldset>
+            <label class="ls-label col-md-12 ls-label-text ls-txt-center ls-sm-margin-bottom">
+              Para redefinir sua senha, informe o e-mail cadastrado na sua conta e lhe enviaremos um link com as instruções. 
+            </label>
+          </fieldset>
+          <fieldset>
+            <label class="ls-label col-md-12">
+              <b class="ls-label-text ls-hidden-accessible">E-mail</b>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email', class:"ls-field-lg" %>
+            </label>
+            <div class="ls-actions-btn">
+              <%= f.submit "Envie instruções para criar nova senha", class: 'ls-btn ls-btn-primary' %>
+            </div>
+            <label class="ls-label col-md-12">
+              <%= render "clients/shared/links" %>
+            </label>
+          </fieldset>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

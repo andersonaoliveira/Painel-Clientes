@@ -1,0 +1,7 @@
+<div class="container-fluid">
+  <h2 class="ls-title-intro ls-ico-user">Bem Vindo <%= @email %>!</h2>
+
+<p>Você pode confirmar sua conta de email clicando no link que segue:</p>
+
+<p><%= link_to 'Confirme minha conta', confirmation_url(@resource, confirmation_token: @token) %></p>
+</div>

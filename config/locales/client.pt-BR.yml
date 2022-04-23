@@ -1,0 +1,29 @@
+pt-BR:
+  activerecord:
+    models:
+      client: Cliente
+      order: Pedido
+    attributes:
+      client:
+        name: 'Nome'
+        email: 'Email'
+        eni: 'CPF'
+        address: 'Endereço'
+        phone: 'Telefone'
+        city: 'Cidade'
+        state: 'Estado'
+        birth_date: 'Data de Nascimento'
+        current_password: 'Senha Atual'
+        legal_name: 'Razão Social'
+        password: 'Senha'
+        password_confirmation: 'Confirme sua senha'
+        remember_me: 'Me lembrar?'
+      order:
+        canceled: "Cancelado"
+        completed: "Finalizado"
+        pending: "Pendente"
+        order_code: "Código do Pedido"
+        product: "Produto"
+        frequency: "Periodicidade"
+        price: "Preço"
+        status: "Estado"

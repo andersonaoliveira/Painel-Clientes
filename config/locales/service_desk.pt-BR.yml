@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      service_desk: Chamados
+    attributes:
+      service_desk:
+        client_id: 'Cliente'
+        category: 'Categoria'
+        order: 'Pedido'
+        description: 'Descrição'
+        statuses:
+          open: 'Aberto'
+          in_progress: 'Em Andamento'
+          wait_approval_client: 'Aguardando Resposta do Cliente'
+          closed: 'Fechado'

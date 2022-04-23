@@ -1,0 +1,17 @@
+<li class=<%= current_page?(admin_clients_path) ? "ls-active" : "" %>>
+  <%= link_to 'Clientes', admin_clients_path, class:"ls-ico-users" %>
+</li>
+<li class=<%= current_page?(products_path) ? "ls-active" : "" %>>
+  <%= link_to 'Produtos', admin_products_path, class: "ls-ico-table-alt" %>
+</li>
+<li class=<%= current_page?(orders_path) ? "ls-active" : "" %>>
+  <%= link_to 'Pedidos', admin_orders_path, class:"ls-ico-edit-admin" %>
+</li>
+<li class=<%= current_page?() ? "ls-active" : "" %>>
+  <%= link_to 'Chamados', {}, class:"ls-ico-panel-pabx" %>
+  <ul>
+    <li><%= link_to 'Todos os Chamados', admin_service_desks_path, class:"ls-ico-multibuckets" %></li>
+    <li><%= link_to 'Meus Chamados', admin_my_service_desks_path, class:"ls-ico-bukets" %></li>
+    <li><%= link_to 'Categorias', admin_categories_path, class:"ls-ico-numbered-list" %></li>
+  </ul>
+</li>

@@ -1,0 +1,12 @@
+[
+  {
+    "id":1,
+    "name":"Semestral",
+    "months":6},
+
+  {
+    "id":2,
+    "name":"Anual",
+    "months":12
+  }
+]

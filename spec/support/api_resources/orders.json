@@ -1,0 +1,25 @@
+[
+  {
+    "id":3,
+    "plan_id":1,
+    "cupom_id":null,
+    "client_id":2,
+    "user_id":2,
+    "status":"pending",
+    "value":"50.0",
+    "period":"Mensal",
+    "client_eni":"33256256870"
+  },
+  {
+    "id":6,
+    "plan_id":1,
+    "cupom_id":null,
+    "client_id":2,
+    "user_id":2,
+    "status":"pending",
+    "value":"50.0",
+    "period":"Mensal",
+    "client_eni":"33256256870"
+  }
+]
+  

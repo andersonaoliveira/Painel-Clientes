@@ -1,0 +1,14 @@
+development:
+  products_api: http://localhost:3002
+  sales_api: http://localhost:3001
+  payment_api: http://localhost:3003
+
+test:
+  products_api: http://localhost:3002
+  sales_api: http://localhost:3003
+  payment_api: http://localhost:3001
+
+production:
+  products_api: http://localhost:3000
+  sales_api: http://localhost:4000
+  payment_api: http://localhost:5000

@@ -1,0 +1,16 @@
+[
+  {
+    "id":2,
+    "name":"Cloud",
+    "key":"CLOUD",
+    "description":"Serviços de Armazenamento na Nuvem",
+    "icon":"/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2e4d7ec5738b5aceb79d85cca3f04de892af9958/cloud.png"
+  },
+  {
+    "id":2,
+    "name":"Cloud",
+    "key":"CLOUD",
+    "description":"Serviços de Armazenamento na Nuvem",
+    "icon":"/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2e4d7ec5738b5aceb79d85cca3f04de892af9958/cloud.png"
+  }
+]

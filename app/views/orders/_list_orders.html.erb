@@ -1,0 +1,29 @@
+<table class="ls-table ls-txt-center ls-table-striped ls-bg-header">
+  <thead>
+    <th>Número do pedido</th>
+    <th>Produto</th>
+    <th>Plano</th>
+    <th>Valor</th>
+    <th>Status do Pedido</th>
+    <th colspan="2">Ações</th>
+  </thead>
+  <tbody>
+    <% @orders.each do |o| %>
+      <% if o.product %>
+      <tr id=<%= o.order_code %>>
+        <td><%= link_to o.order_code, order_path(o.id) %></td>
+        <td><%= o.product.name %></td>
+        <td><%= o.product.plan %></td>
+        <td><%= number_to_currency(o.product.price) %></td>
+        <td><%= Order.human_enum_name(:status, o.status) %></td>
+        <% if o.status == 'pending' %>
+        <td><%= link_to 'Pagar Agora', order_path(o.id), class:"ls-btn ls-btn-primary"   %></td>
+        <td> <%= button_to "Cancelar Pedido", cancel_order_path(o.id), class:"ls-btn-primary-danger",
+        data: { confirm: "O pedido com este plano pode não estar mais disponível no futuro, confirmar?" },
+        method: :post %> </td>
+        <% end %>
+      </tr>
+      <% end %>
+    <% end %> 
+  </tbody>
+</table>

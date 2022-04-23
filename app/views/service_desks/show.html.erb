@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-panel-pabx">Dados do Chamado</h1>
+  <% if @service_desk.wait_approval_client? %>
+    <div class='ls-box ls-board-box'>
+      <header class='ls-info-header'>
+        <div class='col-md-6'>
+          <h2 class='ls-title-3 ls-ico-pencil'>Pesquisa de Satisfação</h2>
+        </div>
+      </header>
+      <div class="col-md-12">
+          <%= form_with(url: close_service_desk_path(@service_desk.id), method: :post, html: {class: 'ls-form ls-form-horizontal row'}) do |f| %>
+            <fieldset>
+              <label class="col-md-12">
+                <h3>Seu problema foi resolvido?</h3><br>
+              </label>
+              <label class="col-md-1 col-md-xs-12 ls-label-text">
+                <%= f.radio_button :survey, 1, {id: 'survey_yes', class: 'ls-field-radio'} %>
+                <%= f.label :survey_yes, 'Sim' %>
+              </label>
+              <label class="col-md-2 ls-label-text">
+                <%= f.radio_button :survey, 0, {id: 'survey_no', class: 'ls-field-radio'} %>
+                <%= f.label :survey_no, 'Não' %>
+              </label>
+            </fieldset>
+            <div class="ls-actions-btn">
+              <%= f.submit 'Enviar', class: 'ls-btn ls-btn-dark' %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class='ls-box ls-board-box'>
+    <header class='ls-info-header'>
+      <div class='col-md-6'>
+        <h2 class='ls-title-3 ls-ico-eye'>#<%= @service_desk.id %></h2>
+      </div>
+      <div class='col-md-offset-4 ls-float-right'>
+        <% if @service_desk.open? %>
+          <%= link_to 'Editar', edit_service_desk_path(@service_desk.id), {class: 'ls-btn ls-btn', name: 'editar'} %>
+          <%= link_to 'Deletar', service_desk_path(@service_desk.id), {class: 'ls-btn ls-btn-primary-danger', id: 'deletar', name: 'deletar', method: :delete, data: { confirm: 'Você está certo disso?' }} %>
+        <% end %>
+        <% if @service_desk.in_progress? %>
+          <%= button_to "Finalizar Chamado", change_to_wait_approval_client_service_desk_path(@service_desk.id),
+          data: { confirm: "O chamado não poderá ser reaberto após finalização, confirmar?" },
+          method: :post, class: 'ls-btn ls-btn-danger' %>
+        <% end %>
+      </div>
+    </header>
+    <table class='ls-table'>
+      <tbody>
+        <tr>
+          <td><strong>Solicitante: </strong><%= @service_desk.client.name %></td>
+          <td><strong>E-mail: </strong><%= @service_desk.client.email %></td>
+        </tr>
+        <% unless @service_desk.admin.nil? %>
+          <tr>
+            <td><strong>Atendente: </strong><%= @service_desk.admin.name %></td>
+            <td><strong>E-mail: </strong><%= @service_desk.admin.email %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td><strong>Data de Abertura: </strong><%= @service_desk.created %></td>
+          <% if @service_desk.closed? %>
+            <td><strong>Data de Fechamento: </strong><%= @service_desk.closed %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td><strong>Status: </strong><%= ServiceDesk.human_enum_name(:status, @service_desk.status) %></td>
+        </tr>
+        <tr>
+          <td><strong>Categoria: </strong><%= @service_desk.category.name %></td>
+        </tr>
+        <% unless @service_desk.order.nil? %>
+          <tr>
+            <td><strong>Pedido: </strong><%= @service_desk.order.order_code unless @service_desk.order.nil? %></td>
+            <td><strong>Produto: </strong><%= @service_desk.order.product.name unless @service_desk.order.product.nil? %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td>
+            <strong>Descrição: </strong><br><br>
+            <%= @service_desk.description %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <% unless @service_desk.open? %>
+    <div class='ls-box ls-board-box'>
+      <header class='ls-info-header'>
+          <h2 class='ls-title-4 ls-ico-mobile ls-sm-margin-top'>Chat</h2>
+      </header>
+      <%= render 'messages', message: @message %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,16 @@
+[
+  {
+    "id":1,
+    "name":"Email",
+    "key":"EMAIL",
+    "description":"Serviços de Email",
+    "icon":"/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f3e9477d5334f949189a228cba4f21d8b3b4c76b/email.png"
+  },
+  {
+    "id":2,
+    "name":"Cloud",
+    "key":"CLOUD",
+    "description":"Serviços de Armazenamento na Nuvem",
+    "icon":"/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2e4d7ec5738b5aceb79d85cca3f04de892af9958/cloud.png"
+  }
+]

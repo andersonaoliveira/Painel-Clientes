@@ -1,0 +1,6 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-user">Bem-vindo a Central de Clientes LocaWeb</h1>
+  <% unless @client || admin_signed_in? %>
+    <%= link_to 'Criar conta', new_client_registration_path %>
+  <% end %>
+</div>

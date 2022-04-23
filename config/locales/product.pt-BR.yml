@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      product: produto
+    attributes:
+      product:
+        name: 'nome'
+        group: 'grupo'
+        plan: 'plano'
+        frequency: 'periodicidade'
+        price: 'preço'
+        client: 'cliente'
+        server: 'servidor'
+        statuses:
+          waiting_payment: 'Aguardando pagamento'
+          paid: 'Pago'
+          installing: 'Instalando'
+          installed: 'Instalado'
+          canceled: 'Cancelado'

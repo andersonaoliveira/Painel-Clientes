@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Painel de Clientes - Locaweb</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+    <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
+  </head>
+
+  <body class="ls-theme-royal-blue">
+    <header class="ls-topbar">
+      <div class="localogo">
+        <span class="ls-show-sidebar ls-ico-menu ls-display-block"></span>
+        <a href="https://www.locaweb.com.br/" target="_blank"><%= image_tag 'locaweb-logo.svg' %></a>
+        <h1 class="ls-brand-name">
+          <a href="/" class="ls-ico-users">
+            <% if admin_signed_in? %><small>Administrador</small><% end %>
+            Central do Cliente
+          </a>
+        </h1>
+      </div>
+      <div>
+        <% if client_signed_in? %>
+          <h4 class="ls-name ls-color-white"> Olá, <%= current_client.name %></h4>
+          <%= link_to 'Sair', destroy_client_session_path, method: :delete, class: "ls-btn-primary-danger ls-btn-xs"  %>
+        <% elsif admin_signed_in? %>
+          <h4 class="ls-name ls-color-white"> Bem-vindo, <%= current_admin.name %></h4>
+          <%= link_to 'Sair', destroy_admin_session_path, method: :delete, class: "ls-btn-primary-danger ls-btn-xs"  %>
+        <% else %>
+          <%= link_to 'Entrar', new_client_session_path, class: "ls-btn-primary-danger"  %>
+        <% end %>
+      </div>
+    </header>
+    <aside class="ls-sidebar">
+      <div class="ls-sidebar-inner">
+        <nav class="ls-menu">
+          <ul>
+            <li class=<%= current_page?(root_path) ? "ls-active" : "" %>>
+              <%= link_to 'Início', root_path, class:"ls-ico-home" %>
+            </li>
+            <% if client_signed_in? %>
+              <%= render 'nav_client' %>
+            <% elsif admin_signed_in? %>
+              <%= render 'nav_admin' %>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+    <main class="ls-main">
+      <% if flash[:notice] %>
+        <div class="notice ls-alert-success ls-dismissable ls-col-md-12">
+          <span data-ls-module="dismiss" class="ls-dismiss">&times;</span>
+          <%= notice %>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert ls-alert-danger ls-dismissable ls-col-md-12">
+          <span data-ls-module="dismiss" class="ls-dismiss">&times;</span>
+          <%= alert %>
+        </div>
+      <% end %>
+      <div class="container-fluid content">
+        <%= yield %>
+      </div>
+      <footer class="ls-footer footer" role="contentinfo">
+        <% if client_signed_in? %>
+          <nav class="ls-footer-menu">
+            <h2 class="ls-title-footer">suporte e ajuda</h2>
+              <ul class="ls-footer-list">
+              <li>
+                <a href="/service_desks/new" class="bg-customer-support">
+                <span class="visible-lg">Criar Novo Chamado</span>
+                </a>
+              </li>
+              <li>
+                <a href="/service_desks" class="bg-my-tickets">
+                <span class="visible-lg">Meus Chamados</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://ajuda.locaweb.com.br/" target="_blank" class="bg-help-desk">
+                <span class="visible-lg">Central de Ajuda</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://statusblog.locaweb.com.br/" target="_blank" class="bg-statusblog">
+                <span class="visible-lg">Statusblog</span>
+                </a>
+              </li>
+              </ul>
+          </nav>
+        <% end %>
+        <% ip = request.remote_ip %>
+        <div class="ls-footer-info">
+          <div class="set-ip"><strong>IP:</strong> <%= ip %></div>
+          <p class="ls-copy-right"> Copyright © 1997-2022 Locaweb Serviços de Internet S/A.</p>
+        </div>
+      </footer>
+    </main>
+
+    
+    <footer>
+      <script src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+      <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
+    </footer>
+    <script>
+      $('#messages').stop().animate({
+        scrollTop: $('#messages')[0].scrollHeight
+      }, 800);
+    
+      async function MaxInstalments(){
+        card_banner = document.getElementById('card_banner')  
+        GetMaxInstalments(card_banner.value)
+      }
+      async function GetMaxInstalments(token) {
+        const response = await fetch(`/api/v1/card_banners/${token}`);
+        const result = await response.json();
+        let slect_instalment = document.querySelector('#instalments_select')
+        slect_instalment.innerHTML = ''
+        for(let i=1; i <= result.max_instalments; i++){
+          slect_instalment.innerHTML += `<option value=${i}>${i}x de R$ ${(parseInt(<%= @order ? @order.price : 0 %>)/i).toFixed(2)}</option>`
+        }
+      }
+
+      $(document).ready(function(){
+        $('.valid_date').mask('0000-00');
+        $('.card_number').mask('0000 0000 0000 0000');
+        $('.security_code').mask('000');
+      });
+    </script>
+  </body>
+</html>

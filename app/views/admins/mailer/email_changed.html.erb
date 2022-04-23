@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <h2 class="ls-title-intro ls-ico-user">OLÁ <%= @email %>!</h2>
+
+<% if @resource.try(:unconfirmed_email?) %>
+  <p>Estamos entrando em contato para lhe informar que seu email está sendo alterado para: <%= @resource.unconfirmed_email %>.</p>
+<% else %>
+  <p>Estamos entrando em contato para lhe informar que seu email foi modificado para: <%= @resource.email %>.</p>
+<% end %>
+</div>

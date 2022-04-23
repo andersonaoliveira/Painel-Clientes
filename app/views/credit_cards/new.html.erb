@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-docs">Cartões de Crédito</h1>
+  <div class="ls-box ls-board-box">
+    <header class="ls-info-header">
+      <h2 class="ls-title-3 ls-ico-plus">Novo Cartão</h2>
+    </header>
+    <%= form_with(url: credit_cards_path, method: :post, class: "ls-form", html: { 'data-ls-module': "form" }) do |form| %>
+      <%= form.hidden_field :client_id, value: current_client.id %>
+      <fieldset class="ls-form-horizontal">
+        <div class="ls-label col-md-6">
+          <%= form.label :card_banner_id, 'Bandeira', class:"ls-label-text" %> <br/>
+          <p class="ls-label-info">Deve estar entre as bandeiras aceitas</p>
+          <div class="ls-custom-select">
+            <%= form.collection_select(:card_banner_id, @card_banners, :id, :name, { include_blank: 'Selecione a bandeira' } ) %>
+          </div>
+        </div>
+        <div class="ls-label col-md-6">
+          <%= form.label :number, 'Número do Cartão *', class:"ls-label-text" %> <br/>
+          <p class="ls-label-info">Apenas números</p>
+          <%= form.text_field(:number, class:'card_number', placeholder: 'XXXX XXXX XXXX XXXX') %>
+        </div>
+      </fieldset>
+      <fieldset class="ls-form-horizontal">
+        <div class="ls-label col-md-4">
+          <%= form.label :valid_date, 'Vencimento do Cartão *', class:"ls-label-text" %> <br/>
+          <p class="ls-label-info">Apenas números</p>
+          <%= form.text_field(:valid_date, class:"valid_date", placeholder:'AAAA-MM') %>
+        </div>
+        <div class="ls-label col-md-4">
+          <%= form.label :security_code, 'Código de Segurança *', class:"ls-label-text" %> <br/>
+          <p class="ls-label-info">Apenas números</p>
+          <%= form.text_field(:security_code, class:'security_code', placeholder: 'XXX') %>
+        </div>
+        <div class="ls-label col-md-4">
+          <%= form.label :cpf, 'CPF do Títular *', class:"ls-label-text" %> <br/>
+          <p class="ls-label-info">Apenas números</p>
+          <%= form.text_field(:cpf, class: 'ls-mask-cpf', placeholder: 'XXX.XXX.XXX-XX') %>
+        </div>
+      </fieldset>
+      <fieldset class="ls-form-horizontal">
+        <div class="ls-label col-md-6">
+          <%= form.label :holder_name, 'Nome do Títular *', class:"ls-label-text" %> <br/>
+          <p class="ls-label-info">Como impresso no cartão</p>
+          <%= form.text_field(:holder_name) %>
+        </div>
+        <div class="ls-label col-md-6">
+          <%= form.label :nickname, 'Apelido para o Cartão', class:"ls-label-text" %> <br/>
+          <p class="ls-label-info">Apelido para identificação</p>
+          <%= form.text_field(:nickname) %>
+        </div>
+        <div class="ls-actions-btn">
+          <%= form.submit 'Gravar', class:'ls-btn-primary' %>
+        </div>
+      </fieldset>
+    <%end%>
+  </div>
+</div>

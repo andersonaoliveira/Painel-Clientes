@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-numbered-list">Categorias
+    <div class='col-md-offset-4 ls-float-right'>
+      <%= link_to 'Criar Nova Categoria', new_admin_category_path, class: 'ls-btn ls-btn-primary' %>
+    </div>
+  </h1>
+  <% unless @categories.nil? %>  
+    <% if @categories.empty? %>
+      <p class='alert'><strong>Não há categorias a serem exibidas</strong></p>
+    <% else %>
+      <table id="categories" class="ls-table ls-txt-center ls-table-striped ls-bg-header">
+        <thead>
+          <th>#</th>
+          <th>Nome</th>
+          <th colspan='2'>Ações</th>
+        </thead>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr id="category-<%= category.id %>">
+              <td><%= category.id %></td>
+              <td><%= category.name %></td>
+              <td><%= link_to 'Editar', edit_admin_category_path(category.id), {class: 'ls-ico-pencil ls-btn ls-btn-primary', name: 'editar'} %></td>
+              <td><%= link_to 'Deletar', admin_category_path(category.id), {class: 'ls-ico-remove ls-btn ls-btn-primary-danger', id: 'deletar', name: 'deletar', method: :delete, data: { confirm: 'Você está certo disso?' }} %></td>
+            </tr>
+          <% end %> 
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+  </div>
+</div>

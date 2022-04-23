@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-table-alt">Dados do Produto</h1>
+  <div class="details">
+    <div class="ls-list">
+      <header class="ls-list-header">
+        <div class="ls-list-title col-md-9">
+          <a><h1><%= @product.name %></h1></a>
+        </div>
+      </header>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Grupo</span>
+          <strong><%= @product.group %></strong>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Código do pedido</span>
+          <strong><%= @product.order.order_code %></strong>
+        </div>
+      </div>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Plano</span>
+          <strong><%= @product.plan %></strong>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Status</span>
+          <strong><%= Product.human_enum_name(:status, @product.status) %></strong>
+        </div>
+      </div>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Periodicidade</span>
+          <strong><%= @product.frequency %></strong>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Preço</span>
+          <strong><%= number_to_currency(@product.price) %></strong>
+        </div>
+      </div>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Código</span>
+          <strong><%= @product.code ? @product.code : '----------' %></strong>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Servidor</span>
+          <strong><%= @product.server ? @product.server : '----------' %></strong>
+        </div>
+      </div>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-9">
+          <strong class="ls-list-label">Cliente</strong>
+          <div class="ls-list">
+            <header class="ls-list-header">
+              <div class="ls-list-title col-md-9">
+                <a><h2><%= @product.client.name %></h2></a>
+              </div>
+              <div class="col-md-3 ls-txt-right">
+                <%= link_to 'Detalhes', admin_client_path(@product.client.id), class: 'ls-btn-primary' %>
+              </div>
+            </header>
+            <div class="ls-list-content ">
+              <div class="col-xs-12 col-md-6">
+                <span class="ls-list-label">Email</span>
+                <strong><%= @product.client.email %></strong>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <span class="ls-list-label">Documento</span>
+                <strong><%= @product.client.eni %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <%= button_to "Cancelar", cancel_admin_product_path(@product.id), class: 'ls-btn ls-btn-primary-danger',
+            data: { confirm: "Deseja confirmar o cancelamento do produto?" },
+            method: :post, disabled: !@product.installed? %>
+</div>

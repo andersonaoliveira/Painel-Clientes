@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-user">Perfil</h1>
+  <% if @client %>
+    <div class="ls-box ls-board-box">
+      <header class='ls-info-header'>
+        <div class='col-md-6'>
+          <h2 class="ls-title-info">Editar Dados da Conta</h2>
+        </div>
+        <div class='col-md-offset-4 ls-float-right ls-regroup'>
+          <div data-ls-module="dropdown" class="ls-dropdown ls-pos-right">
+          <a href="#" class="ls-btn">Opções</a>
+          <ul class="ls-dropdown-nav">
+            <li>
+              <%= link_to 'Editar conta', edit_client_registration_path%>
+            </li>
+            <li>
+              <%= link_to 'Desativar', clients_delete_path%>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'ls-form' }) do |f| %>
+        <%= render "clients/shared/error_messages", resource: resource %>
+        <fieldset class="ls-form-horizontal">
+          <label class="ls-label col-md-4 col-xs-12">
+            <%= f.label :name %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "nome" %>
+          </label>
+          <label class="ls-label col-md-4 col-xs-12">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </label>
+          <label class="ls-label col-md-4 col-xs-12">
+            <%= f.label :birth_date %>
+            <%= f.text_field :birth_date, autofocus: true, autocomplete: "data de nascimento" %>
+          </label>
+        </fieldset>
+        <fieldset>
+          <label class="ls-label col-md-12">
+            <%= f.label :address %>
+            <%= f.text_field :address, autofocus: true, autocomplete: "endereço" %>
+          </label>
+        </fieldset>
+        <fieldset class="ls-form-horizontal">
+          <label class="ls-label col-md-4 col-xs-12">
+            <%= f.label :city %>
+            <%= f.text_field :city, autofocus: true, autocomplete: "cidade" %>
+          </label>
+          <label class="ls-label col-md-4 col-xs-12">
+            <%= f.label :state %>
+            <%= f.text_field :state, autofocus: true, autocomplete: "estado" %>
+          </label>
+          <label class="ls-label col-md-4 col-xs-12">
+            <%= f.label :phone %>
+            <%= f.text_field :phone, autofocus: true, autocomplete: "telefone" %>
+          </label>
+        </fieldset>
+        <fieldset>
+          <label class="ls-label col-md-12">
+            <%= f.label :legal_name %>
+            <%= f.text_field :legal_name, autofocus: true, autocomplete: "razão social" %>
+          </label>
+        </fieldset>
+        <fieldset>
+          <label class="ls-label col-md-12">
+            <%= f.label :current_password %>
+            <label class="ls-label-info">(Precisamos que você digite sua senha atual para confirmar as alterações)</label>
+            <%= f.password_field :current_password, autocomplete: "senha atual" %>
+          </label>
+        </fieldset>
+        <div data-ls-module="collapse" data-target="#0" class="ls-collapse ">
+          <a href="#" class="ls-collapse-header">
+            <h3 class="ls-collapse-title">Alterar Senha</h3>
+          </a>
+          <div class="ls-collapse-body" id="0">
+            <fieldset>
+              <label class="ls-label col-md-12">
+                <%= f.label :password %>
+                <label class="ls-label-info">Digite sua nova senha</label>
+                <%= f.password_field :password, autocomplete: "nova senha" %>
+              </label>
+              <label class="ls-label col-md-12">
+                <%= f.label :password_confirmation %>
+                <label class="ls-label-info">Digite sua nova senha novamente</label>
+                <%= f.password_field :password_confirmation, autocomplete: "nova senha" %>
+              </label>
+            </fieldset>
+          </div>
+        </div>
+        <div class="ls-actions-btn">
+            <%= f.submit "Atualizar", class: 'ls-btn-primary' %>
+          </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

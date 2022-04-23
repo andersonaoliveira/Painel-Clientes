@@ -1,0 +1,78 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-users">Dados do Cliente</h1>
+  <div class="details">
+    <div class="ls-list">
+      <header class="ls-list-header">
+        <div class="ls-list-title col-md-12">
+          <a><h1><%= @client.name %></h1></a>
+        </div>
+      </header>
+      <div class="ls-list-content ">
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Email</span>
+          <strong><%= @client.email %></strong>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <span class="ls-list-label">Documento</span>
+          <strong><%= @client.eni %></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class='ls-box ls-board-box'>
+  <header class='ls-info-header'>
+    <div class='col-md-6'>
+      <h2 class='ls-title-3 ls-ico-edit-admin'>Pedidos</h2>
+    </div>
+  </header>
+  <table id='pedidos' class="ls-table ls-txt-center ls-table-striped ls-bg-header">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr id=<%= order.order_code %>>
+          <td><%= order.order_code %></td>
+          <td><%= Order.human_enum_name(:status, order.status) %></td>
+          <td>
+            <%= button_to "Cancelar", cancel_order_path(order.id), class: 'ls-btn-xs ls-btn-danger',
+            data: { confirm: "Deseja cancelar o cancelamento do pedido?" },
+            method: :post, disabled: !order.pending? %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class='ls-box ls-board-box'>
+  <header class='ls-info-header'>
+    <div class='col-md-6'>
+      <h2 class='ls-title-3 ls-ico-table-alt'>Produtos</h2>
+    </div>
+  </header>
+  <table id='produtos' class="ls-table ls-txt-center ls-table-striped ls-bg-header">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Código</th>
+        <th>Plano</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr id=<%= product.id %>>
+          <td><%= product.name %></td>
+          <td><%= product.code ? product.code : '----------' %></td>
+          <td><%= product.plan %></td>
+          <td><%= Product.human_enum_name(:status, product.status) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

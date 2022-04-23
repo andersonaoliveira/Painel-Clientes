@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      order: pedido
+    attributes:
+      order:
+        order_code: 'número do pedido'
+        client: 'cliente'
+        product: 'produto'
+        statuses:
+          waiting_payment_aproval: 'Aguardando pagamento'
+          canceled: 'Cancelado'
+          pending: 'Pendente'
+          paid: 'Pago'
+          completed: 'Completo'
+          waiting_payment: 'Aguardando pagamento'
+          rejected: 'Pagamento recusado'

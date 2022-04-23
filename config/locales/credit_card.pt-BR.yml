@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      credit_card: cartão de crédito
+    attributes:
+      credit_card:
+        nickname: 'apelido'
+        actives:
+          up: 'Ativo'
+          down: 'Desativado'

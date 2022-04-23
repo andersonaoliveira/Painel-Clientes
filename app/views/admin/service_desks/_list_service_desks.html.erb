@@ -1,0 +1,38 @@
+<table id="service-desks" class="ls-table ls-txt-center ls-table-striped ls-bg-header">
+  <thead>
+    <th>#</th>
+    <th>Categoria</th>
+    <th>Solicitante</th>
+    <th>Data de Abertura</th>
+    <th>Data de Fechamento</th>
+    <th>Atendente</th>
+    <th>Status</th>
+    <th colspan='2'>Ações</th>
+  </thead>
+  <tbody>
+    <% @service_desks.each do |service_desk| %>
+      <tr id="service-desk-<%= service_desk.id %>">
+        <td><%= service_desk.id %></td>
+        <td><%= service_desk.category.name %></td>
+        <td><%= service_desk.client.name %></td>
+        <td><%= service_desk.created %></td>
+        <td><%= service_desk.closed if service_desk.closed? %></td>
+        <td><%= service_desk.admin.name unless service_desk.admin.nil? %></td>
+        <td><%= ServiceDesk.human_enum_name(:status, service_desk.status) %></td>
+        <% if service_desk.open? %>
+          <td><%= link_to 'Detalhes', admin_service_desk_path(service_desk.id), {class: 'ls-btn  ls-btn-primary', name: 'detalhes'} %></td>
+          <td><%= link_to 'Atribuir', admin_assign_service_desk_path(service_desk.id), {class: 'ls-btn ls-btn-dark', id: 'atribuir', name: 'atribuir', method: :post, data: { confirm: 'Você está certo disso?' }} %></td>
+        <% elsif service_desk.in_progress? && service_desk.admin == current_admin %>
+          <td><%= link_to 'Detalhes', admin_service_desk_path(service_desk.id), {class: 'ls-btn ls-btn-primary', name: 'detalhes'} %></td>
+          <td>
+            <%= button_to "Finalizar Chamado", close_admin_service_desk_path(service_desk.id),
+            data: { confirm: "O chamado não poderá ser reaberto após finalização, confirmar?" },
+            method: :post, class: 'ls-btn ls-btn-danger' %>
+          </td>
+        <% else %>
+          <td colspan='2'><%= link_to 'Detalhes', admin_service_desk_path(service_desk.id), {class: 'ls-btn ls-btn-primary', name: 'detalhes'} %></td>
+        <% end %>
+      </tr>
+    <% end %> 
+  </tbody>
+</table>

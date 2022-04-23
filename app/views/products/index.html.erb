@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-table-alt">Produtos</h1>
+  <% if @products.any? %>
+    <% if @active_products.any? %>
+      <div class="ls-box ls-board-box">
+        <header class="ls-info-header">
+          <h2 class="ls-title-3">Produtos Ativos</h2>
+        </header>
+        <table id="actives" class="ls-table ls-txt-center ls-table-striped ls-bg-header">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Plano</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @active_products.each do |product| %>
+              <tr id=<%= product.id %>>
+                <td><%= product.name %></td>
+                <td><%= product.plan %></td>
+                <td><%= Product.human_enum_name(:status, product.status) %></td>
+                <td><%= link_to 'Detalhes', product, class: 'ls-btn ls-btn-primary' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+    <% if @cancelled_products.any? %>
+      <div class="ls-box ls-board-box">
+        <header class="ls-info-header">
+          <h2 class="ls-title-3">Produtos Cancelados</h2>
+        </header>
+        <table id="cancelled" class="ls-table ls-txt-center ls-table-striped ls-bg-header">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Plano</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @cancelled_products.each do |product| %>
+              <tr id=<%= product.id %>>
+                <td><%= product.name %></td>
+                <td><%= product.plan %></td>
+                <td><%= Product.human_enum_name(:status, product.status) %></td>
+                <td><%= link_to 'Detalhes', product, class: 'ls-btn ls-btn-primary' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% else %>
+    <h3>Você não possui nenhum produto</h3>
+    <p>Clique <%= link_to 'AQUI', orders_path %> para visualizar seus pedidos pendentes</p>
+  <% end %>
+</div>

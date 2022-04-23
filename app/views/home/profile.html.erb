@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-user">Perfil</h1>
+  <% if @client %>
+    <div class="ls-box">
+      <div class="ls-float-right ls-regroup">
+        <div data-ls-module="dropdown" class="ls-dropdown ls-pos-right">
+        <a href="#" class="ls-btn">Opções</a>
+        <ul class="ls-dropdown-nav">
+          <li>
+            <%= link_to 'Editar conta', edit_client_registration_path%>
+          </li>
+          <li>
+            <%= link_to 'Desativar', clients_delete_path%>
+          </li>
+        </ul>
+      </div>
+    </div>
+      <form action="" class="ls-form row" data-ls-module="form">
+        <fieldset id="domain=form" class="ls-form-disable ls-form-text">
+          <label class="ls-label col-md-6 col-lg-8">
+            <b class="ls-label-text">Nome</b>
+            <input type="text" value="<%= @client.name %>" required>
+          </label>
+          <label class="ls-label col-md-6 col-lg-8">
+            <b class="ls-label-text">Email</b>
+            <input type="text" value="<%= @client.email %>">
+          </label>
+          <label class="ls-label col-md-6 col-lg-8">
+            <b class="ls-label-text">CPF</b>
+            <input type="text" value="<%= @client.eni %>" required>
+          </label>
+          <label class="ls-label col-md-6 col-lg-8">
+            <b class="ls-label-text">Endereço</b>
+            <input type="text" value="<%= @client.address %>" required>
+          </label>
+          <label class="ls-label col-md-6 col-lg-8">
+            <b class="ls-label-text">Cidade/Estado</b>
+            <input type="text" value="<%= @client.city %> / <%= @client.state %>" required>
+          </label>
+          <label class="ls-label col-md-6 col-lg-8">
+            <b class="ls-label-text">Telefone</b>
+            <input type="text" value="<%= @client.phone %>" required>
+          </label>
+          <label class="ls-label col-md-6 col-lg-8">
+            <b class="ls-label-text">Data de Nascimento</b>
+            <input type="text" value="<%= @client.birth_date %>" required>
+          </label>
+        </fieldset>
+      </form>
+    </div>
+  <% else %>
+    <%= link_to 'Criar conta', new_client_registration_path %>
+  <% end %>
+</div>

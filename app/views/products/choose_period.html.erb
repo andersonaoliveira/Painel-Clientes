@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-table-alt">Produtos</h1>
+  <div class="ls-box ls-board-box">
+    <header class="ls-info-header">
+      <h2 class="ls-title-3 ls-ico-plus">Comprar Novamente</h2>
+    </header>
+    <%= form_with(url: create_order_product_path, method: :post, class: "ls-form", html: { 'data-ls-module': "form" }) do |f|%>
+      <%= f.hidden_field :client_eni, value: current_client.eni %>
+      <%= f.hidden_field :plan_id, value: @plan.id %>
+      <fieldset>
+        <div class="ls-label col-md-4">
+          <%= f.label :name, 'Produto', class:"ls-label-text"%><br/>
+          <%= f.text_field(:name, value: @product.name, disabled: true) %>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <div class="ls-label col-md-4">
+          <%= f.label :plan, 'Plano', class:"ls-label-text"%><br/>
+          <%= f.text_field(:name, value: @plan.name, disabled: true) %>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <div class="ls-label col-md-4">
+          <%= f.label :price, 'Periodicidade', class:"ls-label-text" %> <br/>
+          <div class="ls-custom-select">
+            <%= f.collection_select(:price, @prices, :id, :period_with_price, { include_blank: 'Selecione a periodicidade' } ) %>
+          </div>
+        </div>
+        <div class="ls-actions-btn">
+          <%= f.submit 'Criar Pedido', class:'ls-btn-primary' %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

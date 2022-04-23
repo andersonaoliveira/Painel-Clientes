@@ -1,0 +1,59 @@
+1 - devise - Client
+  * name
+  * CPF or CNPJ unique
+  * email unique
+  * password
+  * phone
+  * address
+  * City
+  * State
+  * Coporate name
+  * Birthday
+
+2 - devise - Admin - pendente
+  * email
+  * name
+  * password
+  * employee_number
+
+3 - Credit_card
+  * Token
+  * Apelido
+  * Cliente
+
+4 - Product
+  * name
+  * Grupo
+  * Plano
+  * Peridiocidade
+  * Preço
+  * Servidor
+  * Identificador
+  * Cliente
+
+7 - category
+  * name
+
+5 - Service_desk
+  * Date
+  * category
+  * Cliente
+  * Admin - pendente
+
+6 - Messages
+  * author
+  * destinatário
+  * content
+  * Service_desk
+
+8 - Orders
+  * id
+  * order_code
+  * plan
+  * client_id = references
+  * product:references
+  * status - enum, default: 0
+
+
+
+

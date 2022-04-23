@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-numbered-list">Categorias</h1>
+  <div class="ls-box ls-board-box">
+    <header class="ls-info-header">
+      <h2 class="ls-title-3 ls-ico-plus">Edição de Categoria</h2>
+    </header>
+    <% if @category.errors.any? %>
+      <span>Verifique os campos abaixo:</span>
+      <ul>
+        <% @category.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= form_with(url: admin_category_path(@category.id), method: :put, html: {class: 'ls-form'}) do |f| %>
+      <fieldset class="ls-form-horizontal">
+        <label class="ls-label col-md-4 col-xs-12">
+          <%= f.label :name, 'Nome', class: 'ls-label-text' %>
+          <%= f.text_field :name, class: 'ls-field', value: @category.name %>
+        </label>
+        <div class="ls-actions-btn">
+          <%= f.submit 'Enviar', class: 'ls-btn-primary' %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

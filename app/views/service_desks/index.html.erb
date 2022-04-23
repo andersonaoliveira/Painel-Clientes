@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-panel-pabx">Chamados
+    <div class='col-md-offset-4 ls-float-right'>
+      <%= link_to 'Abrir Chamado', new_service_desk_path, class: 'ls-btn ls-btn-primary' if client_signed_in? %>
+    </div>
+  </h1>
+  <% unless @service_desks.nil? %>
+    <div class="ls-box-filter">  
+      <%= form_with(url: service_desks_path, method: :get, html: {class: 'ls-form ls-form-inline'}) do |f| %>
+        <fieldset>
+          <label class="ls-label col-md-4 col-xs-12">
+            <b class='ls-label-text'>Busca</b>
+            <div class="ls-custom-select">
+              <%= f.select :status, options_for_select(@status), {name: 'status', class: 'ls-select'} %>
+            </div>
+          </label>
+          <label class="ls-label col-md-4 col-xs-12">
+            <div class="ls-custom-select">
+              <%= f.select :category_id, options_for_select(@categories), {name: 'category', class: 'ls-select'} %>
+            </div>
+          </label>
+          <label class="ls-label col-md-3 col-xs-12">
+            <%= f.text_field :search, class: 'ls-field' %>
+          </label>
+          <label class="ls-label col-md-1 col-xs-12">
+            <%= f.submit 'Filtrar', class: 'ls-btn' %>
+          </label>
+        </fieldset>
+      <% end %>
+    </div>
+    <% if @service_desks.empty? %>
+      <p class='alert'><strong>Não há chamados a serem exibidos</strong></p>
+    <% else %>
+      <%= render 'list_service_desks', service_desks: @service_desks %>
+    <% end %>
+  <% end %>
+</div>

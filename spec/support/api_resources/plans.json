@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Marketing básico",
+    "details": "Hospedagem humilde",
+    "product_group": "Hospedagem"
+  },
+  {
+    "id": 2,
+    "name": "Email Premium",
+    "details": "Serviço diferenciado de email",
+    "product_group": "Email"
+  }
+]

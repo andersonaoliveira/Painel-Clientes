@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-table-alt">Produtos</h1>
+  <% unless @products.nil? %>
+    <% if @products.empty? %>
+      <p class='alert'><strong>Não há produtos a serem exibidos</strong></p>
+    <% else %>
+      <table class="ls-table ls-txt-center ls-table-striped ls-table-striped ls-bg-header">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Código</th>
+            <th>Status</th>
+            <th>Servidor</th>
+            <th>Documento do cliente</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr id=<%= product.id %>>
+              <td><%= product.name %></td>
+              <td><%= product.code ? product.code : '----------' %></td>
+              <td><%= Product.human_enum_name(:status, product.status) %></td>
+              <td><%= product.server ? product.server : '----------' %></td>
+              <td><%= product.client.eni %></td>
+              <td><%= link_to 'Detalhes', admin_product_path(product.id), class: 'ls-btn ls-btn-primary' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-users">Clientes</h1>
+    <% unless @clients.nil? %>
+      <div class="ls-box-filter">
+        <%= form_with url: admin_clients_path, method: :get, html: {class: 'ls-form ls-form-inline'} do %>
+          <fieldset>
+            <label class="ls-label col-sm-1 ls-no-margin-right" style="padding-right:0">
+              <b class="ls-label-text ls-text-lg ls-xs-space">Busca</b>
+            </label>
+            <label class="ls-label col-sm-10 col-lg-9">
+              <%= text_field_tag :q, '', class: 'ls-field', name: 'busca' %>
+            </label>
+            <label class="ls-label col-sm-1">
+              <%= submit_tag 'Pesquisar', class: 'ls-btn ls-btn-dark' %>
+            </label>
+          </fieldset>
+        <% end %>
+      </div>  
+      <% if @clients.empty? %>
+        <p class='alert'><strong>Não há clientes a serem exibidos</strong></p>
+      <% else %>
+        <table class="ls-table ls-txt-center ls-table-striped ls-table-striped ls-bg-header">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Documento</th>
+              <th>Nº de pedidos</th>
+              <th>Nº de produtos instalados</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @clients.each do |client| %>
+              <tr id=<%= client.eni %>>
+                <td><%= client.name %></td>
+                <td><%= client.email %></td>
+                <td><%= client.eni %></td>
+                <td><%= client.orders.count %></td>
+                <td><%= client.products.installed.count %></td>
+                <td><%= link_to 'Detalhes', admin_client_path(client.id), class: 'ls-btn ls-btn-primary' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
+  </div>
+</div>

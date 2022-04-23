@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-docs">Dados do Chamado</h1>
+  <div class='ls-box ls-board-box'>
+    <header class='ls-info-header'>
+      <div class='col-md-6'>
+        <h2 class='ls-title-3 ls-ico-eye'>#<%= @service_desk.id %></h2>
+      </div>
+      <div class='col-md-offset-4 ls-float-right'>
+        <% if @service_desk.open? %>
+          <%= link_to 'Atribuir', admin_assign_service_desk_path(@service_desk.id), {class: 'ls-btn ls-btn-dark', id: 'atribuir', name: 'atribuir', method: :post, data: { confirm: 'Você está certo disso?' }} %>
+        <% end %>
+        <% if @service_desk.in_progress? %>
+          <%= button_to "Finalizar Chamado", close_admin_service_desk_path(@service_desk.id),
+          data: { confirm: "O chamado não poderá ser reaberto após finalização, confirmar?" },
+          method: :post, class: 'ls-btn ls-btn-danger' %>
+        <% end %>
+      </div>
+    </header>
+    <table class='ls-table'>
+      <tbody>
+        <tr>
+          <td><strong>Solicitante: </strong><%= @service_desk.client.name %></td>
+          <td><strong>E-mail: </strong><%= @service_desk.client.email %></td>
+        </tr>
+        <% unless @service_desk.admin.nil? %>
+          <tr>
+            <td><strong>Atendente: </strong><%= @service_desk.admin.name %></td>
+            <td><strong>E-mail: </strong><%= @service_desk.admin.email %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td><strong>Data de Abertura: </strong><%= @service_desk.created %></td>
+          <% if @service_desk.closed? %>
+            <td><strong>Data de Fechamento: </strong><%= @service_desk.closed %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td><strong>Status: </strong><%= ServiceDesk.human_enum_name(:status, @service_desk.status) %></td>
+        </tr>
+        <tr>
+          <td><strong>Categoria: </strong><%= @service_desk.category.name %></td>
+        </tr>
+        <% unless @service_desk.order.nil? %>
+          <tr>
+            <td><strong>Pedido: </strong><%= @service_desk.order.order_code unless @service_desk.order.nil? %></td>
+            <td><strong>Produto: </strong><%= @service_desk.order.product.name unless @service_desk.order.product.nil? %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td>
+            <strong>Descrição: </strong><br><br>
+            <%= @service_desk.description %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <% if @service_desk.in_progress? %>
+    <div class='ls-box ls-board-box'>
+      <header class='ls-info-header'>
+          <h2 class='ls-title-4 ls-ico-mobile ls-sm-margin-top'>Chat</h2>
+      </header>
+      <%= render 'messages', message: @message %>
+    </div>
+  <% end %>
+</div>

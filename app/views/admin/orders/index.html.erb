@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <h1 class="ls-no-margin-left ls-no-margin-right ls-title-intro ls-ico-edit-admin">Pedidos</h1>
+  <% unless @orders.nil? %>
+    <% if @orders.empty? %>
+      <p class='alert'><strong>Não há pedidos a serem exibidos</strong></p>
+    <% else %>
+      <table class="ls-table ls-txt-center ls-table-striped ls-table-striped ls-bg-header">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Status</th>
+            <th>Produto</th>
+            <th>Documento do cliente</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+              <tr id=<%= order.id %>>
+                <td><%= order.order_code %></td>
+                <td><%= Order.human_enum_name(:status, order.status) %></td>
+                <td><%= order.product ? order.product.name : '----------' %></td>
+                <td><%= order.client.eni %></td>
+                <td><%= link_to 'Detalhes', admin_order_path(order.id), class: 'ls-btn ls-btn-primary' %></td>
+              </tr>
+            <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+</div>
